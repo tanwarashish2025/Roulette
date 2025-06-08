@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo Cultural Guide | World Culture Roulette</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F3F4F6;
+            --accent: #F59E0B;
+            --text: #374151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #7C3AED);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .destination-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .destination-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .destination-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .tag-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #D97706;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Destination Intro */
+        .destination-intro {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .intro-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .intro-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        
+        /* Highlights Section */
+        .highlights {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .highlight-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .highlight-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .highlight-card:hover .highlight-image img {
+            transform: scale(1.1);
+        }
+        
+        .highlight-content {
+            padding: 1.5rem;
+        }
+        
+        .highlight-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .highlight-content p {
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .highlight-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Daily Itinerary */
+        .itinerary {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .itinerary-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .itinerary-day {
+            margin-bottom: 3rem;
+        }
+        
+        .itinerary-day h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .itinerary-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .itinerary-time {
+            flex: 0 0 100px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .itinerary-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .itinerary-content p {
+            color: var(--text);
+            opacity: 0.9;
+        }
+        
+        /* Cultural Tips */
+        .cultural-tips {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tip-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tip-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tip-card h3 i {
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links ul li a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .intro-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .destination-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary);
+                transition: all 0.3s ease;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 1rem 0;
+            }
+            
+            .itinerary-item {
+                flex-direction: column;
+            }
+            
+            .itinerary-time {
+                flex: 0 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">World<span>Culture</span>Roulette</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Today's Culture</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="aboutus.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="destination-hero">
+        <div class="hero-content">
+            <h1>Tokyo, Japan</h1>
+            <p>Where ancient traditions meet cutting-edge technology in a dazzling urban landscape</p>
+            <div class="tag-container">
+                <span class="tag">Population: 37 million</span>
+                <span class="tag">Language: Japanese</span>
+                <span class="tag">Currency: Yen (¥)</span>
+            </div>
+            <a href="#itinerary" class="btn">View Daily Itinerary</a>
+        </div>
+    </section>
+
+    <!-- Destination Intro -->
+    <section class="destination-intro">
+        <div class="intro-container">
+            <div class="intro-content">
+                <h2>Discover Tokyo's Unique Culture</h2>
+                <p>Tokyo is a city of contrasts, where serene temples stand beside neon-lit skyscrapers, and centuries-old traditions coexist with futuristic innovation. As the world's most populous metropolitan area, Tokyo offers an endlessly fascinating cultural experience.</p>
+                <p>From the quiet beauty of a traditional tea ceremony to the sensory overload of Akihabara's electronics district, Tokyo will challenge your perceptions and leave you enchanted by Japanese culture.</p>
+                <p>The city's efficient public transport system makes it easy to explore, while its renowned hospitality (omotenashi) ensures visitors feel welcome at every turn.</p>
+            </div>
+            <div class="intro-image">
+                <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Tokyo skyline">
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <div class="section-title">
+            <h2>Tokyo Cultural Highlights</h2>
+            <p>Must-experience aspects of Tokyo's vibrant culture</p>
+        </div>
+        <div class="highlights-grid">
+            <div class="highlight-card">
+                <div class="highlight-image">
+                    <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Senso-ji Temple">
+                </div>
+                <div class="highlight-content">
+                    <h3>Senso-ji Temple</h3>
+                    <p>Tokyo's oldest and most significant Buddhist temple, where you can experience traditional rituals and browse Nakamise shopping street.</p>
+                    <div class="highlight-meta">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Asakusa</span>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-image">
+                    <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Shibuya Crossing">
+                </div>
+                <div class="highlight-content">
+                    <h3>Shibuya Crossing</h3>
+                    <p>The world's busiest pedestrian crossing, a mesmerizing display of Tokyo's organized chaos and urban energy.</p>
+                    <div class="highlight-meta">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Shibuya</span>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-image">
+                    <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Tsukiji Outer Market">
+                </div>
+                <div class="highlight-content">
+                    <h3>Tsukiji Outer Market</h3>
+                    <p>A food lover's paradise offering the freshest sushi, seafood, and Japanese culinary delights.</p>
+                    <div class="highlight-meta">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Chuo City</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Itinerary -->
+    <section class="itinerary" id="itinerary">
+        <div class="section-title">
+            <h2>Daily Cultural Itinerary</h2>
+            <p>Experience Tokyo like a local with this carefully curated day plan</p>
+        </div>
+        <div class="itinerary-container">
+            <div class="itinerary-day">
+                <h3>Morning</h3>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">7:00 AM</div>
+                    <div class="itinerary-content">
+                        <h4>Traditional Japanese Breakfast</h4>
+                        <p>Start your day at a local restaurant with a balanced breakfast of grilled fish, miso soup, rice, and pickled vegetables. Try natto (fermented soybeans) for an authentic experience.</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">8:30 AM</div>
+                    <div class="itinerary-content">
+                        <h4>Meiji Shrine Visit</h4>
+                        <p>Explore this serene Shinto shrine nestled in a forested area near Harajuku. Observe morning rituals and perhaps write a wish on an ema (wooden plaque).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="itinerary-day">
+                <h3>Afternoon</h3>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">12:00 PM</div>
+                    <div class="itinerary-content">
+                        <h4>Ramen Lunch in Shinjuku</h4>
+                        <p>Join salarymen at a tiny ramen shop - order from the vending machine ticket system and enjoy rich tonkotsu or shoyu ramen at the counter.</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">2:00 PM</div>
+                    <div class="itinerary-content">
+                        <h4>Tea Ceremony Experience</h4>
+                        <p>Participate in a traditional tea ceremony in a tatami room, learning the precise movements and philosophy behind this ritual.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="itinerary-day">
+                <h3>Evening</h3>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">6:00 PM</div>
+                    <div class="itinerary-content">
+                        <h4>Izakaya Dinner</h4>
+                        <p>Experience Japanese pub culture with small plates (yakitori, edamame, karaage) and drinks. Say "kanpai!" (cheers) with locals.</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">8:30 PM</div>
+                    <div class="itinerary-content">
+                        <h4>Golden Gai Exploration</h4>
+                        <p>Wander the narrow alleys of this Shinjuku district filled with tiny bars, each with its own unique theme and atmosphere.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Tips -->
+    <section class="cultural-tips">
+        <div class="section-title">
+            <h2>Cultural Tips & Etiquette</h2>
+            <p>Important customs to observe during your Tokyo experience</p>
+        </div>
+        <div class="tips-container">
+            <div class="tip-card">
+                <h3><i class="fas fa-hands"></i> Bowing</h3>
+                <p>A slight bow is the standard greeting. The deeper the bow, the more respect shown. Handshakes are becoming more common in business settings.</p>
+            </div>
+            <div class="tip-card">
+                <h3><i class="fas fa-shoe-prints"></i> Shoes Off</h3>
+                <p>Always remove shoes when entering homes, traditional restaurants, and temples. Look for slippers provided, and never wear them on tatami mats.</p>
+            </div>
+            <div class="tip-card">
+                <h3><i class="fas fa-subway"></i> Public Transport</h3>
+                <p>Keep conversation quiet on trains and buses. Phone calls are forbidden, and eating/drinking is generally discouraged except on long-distance trains.</p>
+            </div>
+            <div class="tip-card">
+                <h3><i class="fas fa-yen-sign"></i> Money Matters</h3>
+                <p>Use both hands when giving/receiving money or business cards. Cash is still king in many places, despite Tokyo's high-tech image.</p>
+            </div>
+            <div class="tip-card">
+                <h3><i class="fas fa-utensils"></i> Dining Etiquette</h3>
+                <p>Never stick chopsticks upright in rice (resembles funeral rites). Say "itadakimasu" before eating and "gochisousama" after finishing.</p>
+            </div>
+            <div class="tip-card">
+                <h3><i class="fas fa-gift"></i> Gift Giving</h3>
+                <p>Gifts are often exchanged. Present and receive gifts with both hands. Modest gifts from your home country are appreciated.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <a href="index.html" class="footer-logo">World<span>Culture</span>Roulette</a>
+                <p>Bringing global cultures to your doorstep one day at a time. Discover, experience, and connect with the world.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#">Today's Culture</a></li>
+                    <li><a href="destinations.html">All Destinations</a></li>
+                    <li><a href="#">Cultural Guides</a></li>
+                    <li><a href="#">Travel Tips</a></li>
+                    <li><a href="#">Local Recipes</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 World Culture Roulette. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if(this.getAttribute('href') === '#') return;
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if(nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+        
+        // Current year for copyright
+        document.querySelector('.copyright p').innerHTML = `&copy; ${new Date().getFullYear()} World Culture Roulette. All rights reserved.`;
+    </script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Culture Roulette | Live Like a Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F3F4F6;
+            --accent: #F59E0B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #7C3AED);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #D97706;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+        
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .roulette-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .roulette-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .destination {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .date {
+            color: #6B7280;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .culture-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .culture-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .culture-item h3 {
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .culture-item p {
+            font-size: 1.1rem;
+        }
+        
+        .places-section {
+            margin-bottom: 3rem;
+        }
+        
+        .place-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .place-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .place-content {
+            padding: 1.5rem;
+        }
+        
+        .place-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hotels-section {
+            margin-bottom: 3rem;
+        }
+        
+        .hotel-card {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .hotel-img {
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .hotel-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+        
+        .hotel-rating {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hotel-price {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .ad-container {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .hotel-card {
+                flex-direction: column;
+            }
+            
+            .hotel-img {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>World Culture Roulette</h1>
+            <p class="subtitle">Experience a new culture every day - live like a local anywhere in the world!</p>
+            <button id="spinBtn" class="btn">Spin the Globe</button>
+            <button id="saveBtn" class="btn btn-secondary">Save This Destination</button>
+        </div>
+    </header>
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="ad-container">
+                <!-- Google AdSense Code -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"></script>
+                <!-- Horizontal Ad -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <div class="roulette-card">
+                <h2 class="destination" id="destination">Tokyo, Japan</h2>
+                <p class="date" id="currentDate"></p>
+                
+                <div class="culture-item">
+                    <h3><i class="fas fa-sun"></i> Daily Routine</h3>
+                    <p id="dailyRoutine">Start your day with a visit to a local shrine, then explore the bustling streets of Shibuya. Enjoy lunch at a tiny ramen shop, spend the afternoon in a traditional tea ceremony, and end your day at an izakaya with locals.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <h3><i class="fas fa-utensils"></i> Breakfast Idea</h3>
+                    <p id="breakfast">Try a traditional Japanese breakfast with grilled fish, miso soup, rice, natto (fermented soybeans), and pickled vegetables.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <h3><i class="fas fa-comment"></i> Local Phrase</h3>
+                    <p id="localPhrase">"Itadakimasu" (いただきます) - Said before eating, meaning "I gratefully receive this food."</p>
+                </div>
+            </div>
+            
+            <div class="ad-container">
+                <!-- Google AdSense Code -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"></script>
+                <!-- Horizontal Ad -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <div class="places-section">
+                <h2>Must-Visit Places in <span id="destinationPlaces">Tokyo</span></h2>
+                
+                <div class="place-card">
+                    <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Senso-ji Temple" class="place-img">
+                    <div class="place-content">
+                        <h3>Senso-ji Temple</h3>
+                        <p>Tokyo's most famous temple, located in Asakusa. The vibrant colors and the massive lantern at the Kaminarimon gate make this a must-see. Wander through Nakamise shopping street for traditional snacks and souvenirs.</p>
+                    </div>
+                </div>
+                
+                <div class="place-card">
+                    <img src="https://images.unsplash.com/photo-1523913507744-1970fd11e9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Shibuya Crossing" class="place-img">
+                    <div class="place-content">
+                        <h3>Shibuya Crossing</h3>
+                        <p>The world's busiest pedestrian crossing, where thousands of people cross at once when the lights turn red. For the best view, head to the Starbucks in the Tsutaya building overlooking the scramble.</p>
+                    </div>
+                </div>
+                
+                <div class="place-card">
+                    <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Meiji Shrine" class="place-img">
+                    <div class="place-content">
+                        <h3>Meiji Shrine</h3>
+                        <p>A serene Shinto shrine nestled in a forested area near Harajuku. The contrast between the peaceful shrine grounds and the bustling Harajuku district just outside is striking.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hotels-section">
+                <h2>Where to Stay in <span id="destinationHotels">Tokyo</span></h2>
+                
+                <div class="hotel-card">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Park Hotel Tokyo" class="hotel-img">
+                    <div class="hotel-content">
+                        <h3>Park Hotel Tokyo</h3>
+                        <p class="hotel-rating">★★★★☆</p>
+                        <p>Located in the heart of Tokyo's Shiodome district with stunning city views. Many rooms feature artwork by Japanese artists, and the hotel is directly connected to Shimbashi Station.</p>
+                        <p class="hotel-price">From $200/night</p>
+                    </div>
+                </div>
+                
+                <div class="hotel-card">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Ryokan Sawanoya" class="hotel-img">
+                    <div class="hotel-content">
+                        <h3>Ryokan Sawanoya</h3>
+                        <p class="hotel-rating">★★★★★</p>
+                        <p>A traditional Japanese inn in the Yanaka district, offering tatami-mat rooms and shared baths. Experience authentic Japanese hospitality in a quiet neighborhood full of old Tokyo charm.</p>
+                        <p class="hotel-price">From $120/night</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ad-container">
+                <!-- Google AdSense Code -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"></script>
+                <!-- Horizontal Ad -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>World Culture Roulette</h3>
+            <p>Discover the world one day at a time</p>
+            
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            
+            <p>&copy; 2023 World Culture Roulette. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for different destinations
+        const destinations = [
+            {
+                city: "Tokyo",
+                country: "Japan",
+                dailyRoutine: "Start your day with a visit to a local shrine, then explore the bustling streets of Shibuya. Enjoy lunch at a tiny ramen shop, spend the afternoon in a traditional tea ceremony, and end your day at an izakaya with locals.",
+                breakfast: "Try a traditional Japanese breakfast with grilled fish, miso soup, rice, natto (fermented soybeans), and pickled vegetables.",
+                localPhrase: "\"Itadakimasu\" (いただきます) - Said before eating, meaning \"I gratefully receive this food.\"",
+                places: [
+                    {
+                        name: "Senso-ji Temple",
+                        description: "Tokyo's most famous temple, located in Asakusa. The vibrant colors and the massive lantern at the Kaminarimon gate make this a must-see. Wander through Nakamise shopping street for traditional snacks and souvenirs.",
+                        image: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Shibuya Crossing",
+                        description: "The world's busiest pedestrian crossing, where thousands of people cross at once when the lights turn red. For the best view, head to the Starbucks in the Tsutaya building overlooking the scramble.",
+                        image: "https://images.unsplash.com/photo-1523913507744-1970fd11e9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Meiji Shrine",
+                        description: "A serene Shinto shrine nestled in a forested area near Harajuku. The contrast between the peaceful shrine grounds and the bustling Harajuku district just outside is striking.",
+                        image: "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    }
+                ],
+                hotels: [
+                    {
+                        name: "Park Hotel Tokyo",
+                        rating: "★★★★☆",
+                        description: "Located in the heart of Tokyo's Shiodome district with stunning city views. Many rooms feature artwork by Japanese artists, and the hotel is directly connected to Shimbashi Station.",
+                        price: "From $200/night",
+                        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Ryokan Sawanoya",
+                        rating: "★★★★★",
+                        description: "A traditional Japanese inn in the Yanaka district, offering tatami-mat rooms and shared baths. Experience authentic Japanese hospitality in a quiet neighborhood full of old Tokyo charm.",
+                        price: "From $120/night",
+                        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    }
+                ]
+            },
+            {
+                city: "Paris",
+                country: "France",
+                dailyRoutine: "Begin with fresh croissants at a neighborhood boulangerie, then stroll along the Seine. Visit a local market for lunch ingredients, enjoy an afternoon in a quaint café people-watching, and end with an evening walk through Montmartre.",
+                breakfast: "A classic French breakfast: café au lait with a buttery croissant or pain au chocolat, and fresh orange juice.",
+                localPhrase: "\"Profiter du moment\" - Meaning \"Enjoy the moment,\" a perfect phrase for Parisian life.",
+                places: [
+                    {
+                        name: "Eiffel Tower",
+                        description: "No visit to Paris is complete without seeing this iconic landmark. For the best experience, visit at night when the tower sparkles with lights every hour.",
+                        image: "https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Louvre Museum",
+                        description: "Home to thousands of works of art, including the Mona Lisa and Venus de Milo. The glass pyramid entrance is an architectural marvel itself.",
+                        image: "https://images.unsplash.com/photo-1448907503123-67254d59ca4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Notre-Dame Cathedral",
+                        description: "A masterpiece of French Gothic architecture, currently being restored after the 2019 fire. The surrounding area of Île de la Cité is beautiful to explore.",
+                        image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    }
+                ],
+                hotels: [
+                    {
+                        name: "Hôtel du Louvre",
+                        rating: "★★★★☆",
+                        description: "A historic hotel opposite the Louvre Museum, offering elegant rooms with classic Parisian charm. Perfect location for exploring central Paris.",
+                        price: "From €250/night",
+                        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Le Marais Hôtel",
+                        rating: "★★★★★",
+                        description: "Boutique hotel in the trendy Marais district, known for its fashionable boutiques and vibrant nightlife. Rooms blend contemporary design with historic architecture.",
+                        price: "From €180/night",
+                        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    }
+                ]
+            },
+            {
+                city: "Marrakech",
+                country: "Morocco",
+                dailyRoutine: "Start with mint tea on a rooftop terrace, then get lost in the souks. Enjoy a tagine lunch, relax at a hammam in the afternoon, and end with sunset views from a rooftop café in the Medina.",
+                breakfast: "Msemen (Moroccan pancakes) with honey and amlou (almond-argan nut spread), accompanied by fresh mint tea.",
+                localPhrase: "\"Insha'Allah\" - Meaning \"God willing,\" used when discussing future plans.",
+                places: [
+                    {
+                        name: "Jemaa el-Fnaa",
+                        description: "The main square of Marrakech's old city, coming alive at night with food stalls, musicians, and entertainers. By day, it's filled with orange juice vendors and snake charmers.",
+                        image: "https://images.unsplash.com/photo-1518544866330-95b5ac5d1b3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Majorelle Garden",
+                        description: "A stunning botanical garden designed by French painter Jacques Majorelle, later owned by Yves Saint Laurent. The vibrant blue buildings and exotic plants create an oasis in the city.",
+                        image: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Bahia Palace",
+                        description: "A masterpiece of Moroccan architecture with intricate tile work, carved cedar ceilings, and peaceful courtyards. Built in the late 19th century for a grand vizier.",
+                        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    }
+                ],
+                hotels: [
+                    {
+                        name: "La Mamounia",
+                        rating: "★★★★★",
+                        description: "Legendary luxury hotel with stunning gardens, multiple pools, and impeccable service. The spa is one of the best in Morocco, offering traditional hammam treatments.",
+                        price: "From $400/night",
+                        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    },
+                    {
+                        name: "Riad Yasmine",
+                        rating: "★★★★☆",
+                        description: "A charming boutique riad in the heart of the Medina, featuring a photogenic green-tiled pool and rooftop terrace with views of the Atlas Mountains.",
+                        price: "From $150/night",
+                        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    }
+                ]
+            }
+        ];
+
+        // Function to get a random destination based on the day of the year
+        function getDailyDestination() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            
+            // Use the day of year to select a destination (modulo ensures we stay within array bounds)
+            const destinationIndex = dayOfYear % destinations.length;
+            return destinations[destinationIndex];
+        }
+
+        // Function to update the page with destination data
+        function updateDestination(destination) {
+            document.getElementById('destination').textContent = `${destination.city}, ${destination.country}`;
+            document.getElementById('dailyRoutine').textContent = destination.dailyRoutine;
+            document.getElementById('breakfast').textContent = destination.breakfast;
+            document.getElementById('localPhrase').textContent = destination.localPhrase;
+            document.getElementById('destinationPlaces').textContent = destination.city;
+            document.getElementById('destinationHotels').textContent = destination.city;
+            
+            // Update current date display
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+            
+            // Update places to visit
+            const placesSection = document.querySelector('.places-section');
+            let placesHTML = `<h2>Must-Visit Places in ${destination.city}</h2>`;
+            
+            destination.places.forEach(place => {
+                placesHTML += `
+                    <div class="place-card">
+                        <img src="${place.image}" alt="${place.name}" class="place-img">
+                        <div class="place-content">
+                            <h3>${place.name}</h3>
+                            <p>${place.description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            placesSection.innerHTML = placesHTML;
+            
+            // Update hotels
+            const hotelsSection = document.querySelector('.hotels-section');
+            let hotelsHTML = `<h2>Where to Stay in ${destination.city}</h2>`;
+            
+            destination.hotels.forEach(hotel => {
+                hotelsHTML += `
+                    <div class="hotel-card">
+                        <img src="${hotel.image}" alt="${hotel.name}" class="hotel-img">
+                        <div class="hotel-content">
+                            <h3>${hotel.name}</h3>
+                            <p class="hotel-rating">${hotel.rating}</p>
+                            <p>${hotel.description}</p>
+                            <p class="hotel-price">${hotel.price}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            hotelsSection.innerHTML = hotelsHTML;
+        }
+
+        // Function to spin the globe and get a random destination (not based on date)
+        function spinGlobe() {
+            const randomIndex = Math.floor(Math.random() * destinations.length);
+            updateDestination(destinations[randomIndex]);
+        }
+
+        // Initialize the page with today's destination
+        document.addEventListener('DOMContentLoaded', function() {
+            const todaysDestination = getDailyDestination();
+            updateDestination(todaysDestination);
+            
+            // Set up event listeners
+            document.getElementById('spinBtn').addEventListener('click', spinGlobe);
+            document.getElementById('saveBtn').addEventListener('click', function() {
+                alert('Destination saved to your favorites!');
+            });
+        });
+    </script>
+</body>
+</html>
